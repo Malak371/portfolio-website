@@ -1,8 +1,8 @@
 # Portfolio website
 
-Personal portfolio of Malak Abdelhakim, built with [Astro](https://astro.build) as a static site and deployed to GitHub Pages.
+Personal portfolio of Malak Abdelhakim, built with [Astro](https://astro.build) as a static site and deployed on Netlify.
 
-**Live site:** https://malak371.github.io/portfolio-website/
+**Live site:** https://portfolio-website-malak.netlify.app/
 
 ## Editing content
 
@@ -19,7 +19,7 @@ Requires Node 22.12+.
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321/portfolio-website/
+npm run dev        # http://localhost:4321/
 npm run build      # outputs dist/
 npm run preview    # serve the production build
 npm run check:html # validate the built HTML
@@ -27,15 +27,19 @@ npm run check:html # validate the built HTML
 
 ## Deployment
 
-[`.github/workflows/site.yml`](.github/workflows/site.yml) runs on every push and pull request. It builds the site, validates the HTML, and checks every link with [lychee](https://lychee.cli.rs) (exclusions are in [`lychee.toml`](lychee.toml)). Pushes to `main` are then deployed to GitHub Pages.
+Netlify builds and deploys every push to `main` and posts a deploy preview on each pull request (settings in [`netlify.toml`](netlify.toml)).
+
+[`.github/workflows/site.yml`](.github/workflows/site.yml) runs on every push and pull request. It builds the site, validates the HTML, and checks every link with [lychee](https://lychee.cli.rs) (exclusions are in [`lychee.toml`](lychee.toml)).
 
 ## Adding a custom domain later
 
 1. Buy a domain from any registrar (for example Cloudflare, Namecheap or Porkbun).
-2. At the registrar, add DNS records:
-   - For a root domain (`example.com`), add four `A` records pointing to `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`. Optionally also add `AAAA` records to `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153` and `2606:50c0:8003::153`.
-   - For `www.example.com`, add a `CNAME` record pointing to `malak371.github.io`.
-3. Recommended: verify the domain under GitHub **Settings → Pages → Add a domain** (your account settings, not the repo). This stops anyone else from claiming it.
-4. In this repo, open **Settings → Pages → Custom domain**, enter the domain and save. Wait for the DNS check to pass, then tick **Enforce HTTPS** (the certificate can take up to an hour).
-5. In `astro.config.mjs`, set `site` to `https://example.com` and `base` to `'/'`. Also remove the GitHub Pages URL exclusion from `lychee.toml`, then push to `main`.
+2. In Netlify, open the **portfolio-website-malak** project, go to **Domain management → Add a domain**, and enter the domain.
+3. Point DNS at Netlify. Choose one option:
+   - **Simplest:** let Netlify manage DNS. Netlify shows four nameservers; enter them at your registrar in place of the registrar's own.
+   - **Keep DNS at your registrar:**
+     - For `www.example.com`, add a `CNAME` record pointing to `portfolio-website-malak.netlify.app`.
+     - For the root `example.com`, add an `ALIAS`/`ANAME`/flattened `CNAME` to `apex-loadbalancer.netlify.com` if your registrar supports one. Otherwise add an `A` record to `75.2.60.5`.
+4. Wait for DNS to propagate (minutes to a few hours). Netlify issues a free HTTPS certificate automatically; check it under **Domain management → HTTPS**.
+5. In `astro.config.mjs`, set `site` to `https://example.com`, update the exclusion in `lychee.toml`, and push to `main`.
 6. Update the repo's About link and your GitHub profile README to the new URL.

@@ -1,9 +1,13 @@
-# Netlify deploy previews for pull requests. They serve the site from the root,
-# so the GitHub Pages base path is turned off here.
+# Netlify builds production from main and a deploy preview for every pull request.
 [build]
   command = "npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
-  SITE_BASE = "/"
+
+# Long-lived caching for fingerprinted build assets.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
