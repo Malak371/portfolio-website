@@ -1,0 +1,16 @@
+# Link checker config (https://lychee.cli.rs). Used by the CI workflow.
+
+# These sites block automated requests even though the links work in a browser.
+exclude = [
+  "^https://(www\\.)?linkedin\\.com/",
+  "^https://wellnesslab\\.achanceinlife\\.org",
+  # The site's own canonical/Open Graph URLs (they 404 until the first deploy).
+  "^https://malak371\\.github\\.io/portfolio-website",
+]
+
+# Streamlit apps answer anonymous requests with a 303 to a login page that then
+# loads the public app, and free-tier APIs can be slow to wake up.
+accept = ["200..=299", "303"]
+max_redirects = 10
+timeout = 60
+max_retries = 3

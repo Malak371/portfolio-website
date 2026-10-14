@@ -7,7 +7,7 @@ const title = `${profile.name} | Software Engineer`;
 const description = isTodo(profile.summary)
   ? `Portfolio of ${profile.name}, software engineer: featured projects, experience and contact details.`
   : profile.summary;
-const canonical = new URL(import.meta.env.BASE_URL, Astro.site).href;
+const canonical = new URL(`${import.meta.env.BASE_URL.replace(/\/$/, '')}/`, Astro.site).href;
 const ogImage = new URL(publicUrl('og.png'), Astro.site).href;
 ---
 <!doctype html>

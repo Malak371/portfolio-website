@@ -56,7 +56,8 @@ const rows: [string, string | undefined][] = p.private
         </div>
       ))}
     </dl>
-    <ul class="stack" aria-label={`${p.title} tech stack`}>
+    <p class="sr-only">Tech stack:</p>
+    <ul class="stack">
       {p.stack.map((s) => <li class:list={{ todo: isTodo(s) }}>{s}</li>)}
     </ul>
     <div class="button-row small">
