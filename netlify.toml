@@ -1,0 +1,9 @@
+# Netlify deploy previews for pull requests. They serve the site from the root,
+# so the GitHub Pages base path is turned off here.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  SITE_BASE = "/"
