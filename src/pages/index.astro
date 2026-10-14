@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import T from '../components/T.astro';
+import { site, isTodo } from '../lib/content';
+
+const { profile, projects, about, experience } = site;
+const year = new Date().getFullYear();
+---
+<Base>
+  <Header />
+  <main id="main">
+    <Hero />
+
+    <section id="projects" class="section container" aria-labelledby="projects-title">
+      <h2 id="projects-title">Featured projects</h2>
+      <div class="projects">
+        {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+      </div>
+    </section>
+
+    <section id="about" class="section container" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <div class="about">
+        <div class="bio">
+          {about.bio.map((para) => <p><T v={para} /></p>)}
+        </div>
+        <dl class="skills">
+          {about.skills.map((g) => (
+            <div class="skill-group">
+              <dt>{g.group}</dt>
+              <dd>
+                <ul class="stack">
+                  {g.items.map((s) => <li class:list={{ todo: isTodo(s) }}>{s}</li>)}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section id="experience" class="section container" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      <ol class="timeline">
+        {experience.map((job) => (
+          <li>
+            <h3><T v={job.role} /> · <span class="org"><T v={job.organization} /></span></h3>
+            <p class="dates"><T v={job.start} /> – <T v={job.end} /></p>
+            <ul>
+              {job.points.map((pt) => <li><T v={pt} /></li>)}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="contact" class="section container" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p class="contact-lead">The best way to reach me is by email or LinkedIn.</p>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-label">Email</span>
+          {isTodo(profile.email)
+            ? <mark class="todo">{profile.email}</mark>
+            : <a href={`mailto:${profile.email}`}>{profile.email}</a>}
+        </li>
+        <li>
+          <span class="contact-label">LinkedIn</span>
+          <a href={profile.linkedin} target="_blank" rel="noopener">{profile.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a>
+        </li>
+        <li>
+          <span class="contact-label">GitHub</span>
+          <a href={profile.github} target="_blank" rel="noopener">{profile.github.replace(/^https?:\/\//, '')}</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {year} {profile.name}. Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>.</p>
+    </div>
+  </footer>
+</Base>

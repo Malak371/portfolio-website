@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import T from './T.astro';
+import { asset, isTodo, type Project } from '../lib/content';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+const { project: p, index } = Astro.props;
+const image = asset(p.image ? `projects/${p.image}` : undefined);
+const id = `project-${index}`;
+
+// Public projects: problem → solution → impact.
+// Private (nonprofit) projects: a longer case study.
+const rows: [string, string | undefined][] = p.private
+  ? [
+      ['Problem', p.problem],
+      ['My role', p.role],
+      ['What I built', p.solution],
+      ['Architecture', p.architecture],
+      ['Impact', p.impact],
+    ]
+  : [
+      ['Problem', p.problem],
+      ['Solution', p.solution],
+      ['Impact', p.impact],
+    ];
+---
+<article class:list={['project', { 'project-private': p.private }]} aria-labelledby={id}>
+  {image ? (
+    <Image
+      class="project-image"
+      src={image}
+      alt={p.imageAlt ?? ''}
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 960px) 50vw, 100vw"
+      loading={index === 0 ? 'eager' : 'lazy'}
+    />
+  ) : (
+    <div class="project-image placeholder"><mark class="todo">TODO: add screenshot</mark></div>
+  )}
+  <div class="project-body">
+    <h3 id={id}>{p.title}</h3>
+    {p.private && (
+      <p class="private-label">
+        Built for <T v={p.organization ?? ''} />; code is private.
+      </p>
+    )}
+    <p class="tagline"><T v={p.tagline} /></p>
+    <dl class="project-facts">
+      {rows.map(([label, value]) => (
+        <div>
+          <dt>{label}</dt>
+          <dd><T v={value ?? ''} /></dd>
+        </div>
+      ))}
+    </dl>
+    <ul class="stack" aria-label={`${p.title} tech stack`}>
+      {p.stack.map((s) => <li class:list={{ todo: isTodo(s) }}>{s}</li>)}
+    </ul>
+    <div class="button-row small">
+      {p.links.live && (
+        <a class="button primary" href={p.links.live} target="_blank" rel="noopener">
+          {p.private ? 'Visit site' : 'Live demo'}<span class="sr-only"> of {p.title}</span>
+        </a>
+      )}
+      {p.links.code && (
+        <a class="button" href={p.links.code} target="_blank" rel="noopener">
+          Code<span class="sr-only"> for {p.title}</span>
+        </a>
+      )}
+      {p.links.video && (
+        <a class="button" href={p.links.video} target="_blank" rel="noopener">
+          Video<span class="sr-only"> of {p.title}</span>
+        </a>
+      )}
+    </div>
+    {p.note && <p class="note">{p.note}</p>}
+  </div>
+</article>

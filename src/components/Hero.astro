@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import T from './T.astro';
+import { site, asset, publicUrl, resumeAvailable } from '../lib/content';
+
+const { profile } = site;
+const photo = asset(profile.photo);
+---
+<section id="top" class="hero container" aria-labelledby="hero-title">
+  <div class="hero-text">
+    <h1 id="hero-title">{profile.name}</h1>
+    <p class="headline"><T v={profile.headline} /></p>
+    <p class="hero-summary"><T v={profile.summary} /></p>
+    <p class="hero-location"><T v={profile.location} /></p>
+    <div class="button-row">
+      {resumeAvailable ? (
+        <a class="button primary" href={publicUrl(profile.resume)} download>
+          Resume <span class="muted-inline">(PDF)</span>
+        </a>
+      ) : (
+        <mark class="todo">TODO: add resume.pdf to public/</mark>
+      )}
+      <a class="button" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+      <a class="button" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  {photo && (
+    <Image
+      class="hero-photo"
+      src={photo}
+      alt={profile.photoAlt}
+      widths={[192, 384]}
+      sizes="192px"
+      loading="eager"
+      fetchpriority="high"
+    />
+  )}
+</section>
