@@ -1,0 +1,107 @@
+# All site content lives here. Edit this file to change text, add projects,
+# skills or experience; no layout code needs to change.
+#
+# Anything starting with "TODO" is a placeholder and is highlighted on the page
+# so it can't be missed. Search for TODO before publishing.
+
+profile:
+  name: Malak Abdelhakim
+  headline: "TODO: one-line headline (e.g. Software engineer building data-driven web apps)"
+  location: "TODO: confirm location (e.g. New York, NY)"
+  # Short intro shown under the headline in the hero.
+  summary: "TODO: 1–2 sentence intro"
+  photo: profile.jpeg          # file in src/assets/; set to "" to hide the photo
+  photoAlt: Portrait of Malak Abdelhakim
+  email: "TODO: confirm public email"
+  github: https://github.com/Malak371
+  linkedin: https://www.linkedin.com/in/malak-abdelhakim-906854201/
+  resume: resume.pdf           # file in public/; set to "" to hide the Resume button
+
+# Featured projects, best first. Fields:
+#   problem / solution / impact  short sentences for the card
+#   stack                        list of technologies
+#   image                        file in src/assets/projects/
+#   links                        live / code / video (omit any that don't exist)
+#   note                         optional small note under the links
+#   private                      set for projects whose code can't be shared;
+#                                shows the "code is private" label and a case study
+projects:
+  - title: Health & Performance Aggregator
+    tagline: Sleep, activity, mood, training and study load in one dashboard, with explainable recovery and burnout-risk insights.
+    problem: Health and performance data is spread across apps (Apple Health, Fitbit, training logs), so it's hard to see how sleep, training and study load affect each other.
+    solution: A FastAPI service ingests CSV, Apple Health and Fitbit exports, computes rolling load (ACWR), a recovery score, a transparent burnout-risk score, anomalies and a next-day readiness prediction; a Streamlit dashboard draws the results.
+    impact: "TODO: add impact or metric (e.g. test coverage, users, data volume)"
+    stack: [Python, FastAPI, PostgreSQL, SQLAlchemy, Alembic, scikit-learn, pandas, Streamlit, Docker, GitHub Actions]
+    image: health-aggregator.png
+    imageAlt: Health & Performance Aggregator dashboard showing a weekly summary of sleep, activity and mood
+    links:
+      live: https://health-performance-aggregator.streamlit.app/
+      code: https://github.com/Malak371/health-aggregator
+      # video: TODO: add demo video URL
+    note: Free hosting sleeps when idle, so the first load can take about a minute.
+
+  - title: Finance Tracker
+    tagline: Import a bank statement and see where your money goes, with categorisation that learns from your corrections.
+    problem: Bank statements come in inconsistent CSV formats, and categorising and budgeting transactions by hand is tedious.
+    solution: A React SPA and FastAPI backend that import any bank CSV (delimiters, encodings, date and amount formats), skip duplicates, categorise transactions with rules plus a per-user Naive Bayes model, detect recurring charges and warn before budgets run out.
+    impact: "TODO: add impact or metric"
+    stack: [React, Vite, Tailwind CSS, FastAPI, PostgreSQL, SQLAlchemy, Naive Bayes, Playwright, Docker]
+    image: finance-tracker.png
+    imageAlt: Finance Tracker dashboard with budget alerts, spending insights and a monthly trend chart
+    links:
+      live: https://finance-tracker-and-manager.vercel.app
+      code: https://github.com/Malak371/finance-tracker
+      # video: TODO: add demo video URL
+    note: The demo needs no sign-up. Its API can take up to a minute to wake up.
+
+  - title: NPA Studio
+    tagline: "TODO: one-line description"
+    private: true
+    organization: "TODO: organization name"
+    problem: "TODO: what problem the organization had"
+    role: "TODO: your role (e.g. sole developer, lead engineer)"
+    solution: "TODO: what you built"
+    architecture: "TODO: short architecture overview (frontend, backend, data, hosting)"
+    impact: "TODO: add impact or metric"
+    stack: ["TODO: stack"]
+    image: ""                   # TODO: screenshot of the public site (needs your OK)
+    imageAlt: ""
+    links:
+      live: https://www.npastudio.com
+
+  - title: Health & Wellness Lab
+    tagline: "TODO: one-line description"
+    private: true
+    organization: "TODO: organization name"
+    problem: "TODO: what problem the organization had"
+    role: "TODO: your role"
+    solution: "TODO: what you built"
+    architecture: "TODO: short architecture overview"
+    impact: "TODO: add impact or metric"
+    stack: ["TODO: stack"]
+    image: ""                   # TODO: screenshot of the public site (needs your OK)
+    imageAlt: ""
+    links:
+      live: https://wellnesslab.achanceinlife.org/
+
+about:
+  bio:
+    - "TODO: short bio paragraph (3–4 sentences)"
+  skills:
+    - group: Languages
+      items: ["TODO: confirm", Python, JavaScript, Java, SQL]
+    - group: Frameworks
+      items: ["TODO: confirm", React, FastAPI, Streamlit, Tailwind CSS]
+    - group: Data / ML
+      items: ["TODO: confirm", pandas, scikit-learn, PostgreSQL]
+    - group: Tools
+      items: ["TODO: confirm", Git, Docker, GitHub Actions, Playwright]
+
+# Most recent first. Should match the resume.
+experience:
+  - role: "TODO: role"
+    organization: "TODO: organization"
+    start: "TODO: start"
+    end: "TODO: end (or Present)"
+    points:
+      - "TODO: what you did / achieved"
