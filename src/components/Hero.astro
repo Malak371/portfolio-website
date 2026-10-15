@@ -14,7 +14,7 @@ const photo = asset(profile.photo);
     <p class="hero-location"><T v={profile.location} /></p>
     <div class="button-row">
       {resumeAvailable ? (
-        <a class="button primary" href={publicUrl(profile.resume)} download>
+        <a class="button primary" href={publicUrl(profile.resume)} download={`${profile.name.replace(/ /g, '_')}_Resume.pdf`}>
           Resume <span class="muted-inline">(PDF)</span>
         </a>
       ) : (

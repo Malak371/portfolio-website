@@ -100,13 +100,13 @@ about:
       Engineer Intern at ASAPP I built NLP models for customer service conversations.
   skills:
     - group: Languages
-      items: [Python, TypeScript, JavaScript, SQL, PL/pgSQL, Java, C, HTML/CSS]
+      items: [Python, TypeScript, JavaScript, Java, SQL, PL/pgSQL, C, HTML/CSS]
     - group: Frameworks
-      items: [Flask, FastAPI, React, Next.js, Node.js, Express, Tailwind CSS, Streamlit]
+      items: [React, Next.js, Vite, Tailwind CSS, FastAPI, Flask, Node.js, Express, Streamlit, SQLAlchemy, Pydantic]
     - group: Data / ML / AI
-      items: [PostgreSQL, SQLAlchemy, Alembic, Supabase, MongoDB, Redis, pandas, scikit-learn, NLP, Claude API]
+      items: [PostgreSQL, Supabase, SQLite, MongoDB, Redis, pandas, NumPy, scikit-learn, NLP, Claude API, Tesseract OCR]
     - group: Tools & cloud
-      items: [Git, Docker, GitHub Actions, Cloudflare Pages & R2, Stripe, Playwright]
+      items: [Git, Docker, GitHub Actions, Vercel, Render, Cloudflare Pages & R2, Stripe, pytest, Playwright, Vitest]
 
 # Most recent first. Should match the resume.
 experience:
@@ -116,16 +116,18 @@ experience:
     start: Apr 2026
     end: Present
     points:
-      - Design, build and deploy two production web platforms for the organization, including NPA Studio, an LLM-powered assessment product that turns uploaded documents into structured reports for nonprofits, advisors and funders.
-      - Partner with non-technical program and leadership stakeholders to translate operational needs into technical requirements, rapid prototypes and shipped features, iterating on real user feedback.
-      - Build and maintain structured data pipelines for collecting, processing and analyzing program data across multiple stakeholders.
+      - Built and deployed two production web platforms for the organization, npastudio.com and wellnesslab.achanceinlife.org, owning each from requirements gathering through design, development and launch.
+      - Collaborate with organizational stakeholders to translate operational and business needs into technical requirements and user-friendly, scalable solutions.
+      - Build and maintain structured data workflows for collecting, processing and analyzing program data across multiple stakeholders supporting international program operations.
+      - Make system design decisions balancing speed, reliability, security and maintainability, and coordinate across teams to deliver key initiatives on time.
   - role: AI Fellow
-    organization: Break Through Tech AI
+    organization: Break Through Tech
     location: New York, NY
     start: May 2023
     end: Apr 2024
     points:
-      - Selected from 1,500+ applicants for a 12-month AI program with Cornell Tech faculty coursework and industry mentorship.
+      - Selected from 1,500+ applicants for a 12-month program including machine learning coursework with Cornell faculty, experiential learning and mentorship from industry professionals.
+      - Collaborated with a team on an industry project identifying salient parts of customer service conversations, experimenting with combinations of vectorization techniques and models.
       - Achieved 92% accuracy in a Kaggle image classification competition hosted for the New York Botanical Garden.
   - role: Machine Learning Engineer Intern
     organization: ASAPP
@@ -133,13 +135,31 @@ experience:
     start: Aug 2023
     end: Dec 2023
     points:
-      - Built supervised NLP models to predict the most salient sentences in customer service conversations using feature engineering and vectorization.
-      - Systematically compared model and vectorizer combinations (TF-IDF, Bag of Words, Logistic Regression, KNN) with accuracy, precision, recall, F1-score and ROC AUC to select the best performing approach.
+      - Built supervised learning models to predict salient sentences in customer service conversations using feature engineering and vectorization techniques on large-scale customer interaction data.
+      - Systematically tested model and vectorization combinations (TF-IDF and Bag of Words with Logistic Regression and KNN) to identify the best performing approach.
+      - Evaluated models with accuracy, precision, recall, F1-score and ROC AUC to drive iterative improvement.
+      - Built backend data processing workflows with structured datasets and APIs to support end-to-end model development.
+  - role: Research Assistant
+    organization: Stevens Institute of Technology
+    location: Hoboken, NJ
+    start: May 2023
+    end: Aug 2023
+    points:
+      - Collaborated with faculty to evaluate AI tools (ChatGPT) in educational settings, analyzing their effectiveness for assignment creation and instructional support.
+      - Designed and assessed AI-generated assignments on Java design patterns, implementing and testing Java solutions to evaluate correctness and usability.
+      - Documented and presented findings on the feasibility and limitations of AI-assisted teaching tools.
+  - role: Marketing Intern
+    organization: A Chance In Life
+    location: New York, NY
+    start: Dec 2020
+    end: Mar 2021
+    points:
+      - Helped raise $2,880 in sponsorships for children through a team-led social media marketing campaign.
 
 education:
   - school: Stevens Institute of Technology
     location: Hoboken, NJ
     degree: B.S. in Computer Science · GPA 3.6 · Pinnacle Scholar
     date: Dec 2025
-  - school: Cornell Tech (Break Through Tech AI)
-    degree: Certificate in Machine Learning Foundations
+  - school: Cornell Tech
+    degree: Online Certificate in Machine Learning Foundations (through Break Through Tech)
