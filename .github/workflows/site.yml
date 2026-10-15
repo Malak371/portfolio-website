@@ -43,7 +43,7 @@ jobs:
 
       - name: Report remaining placeholders
         run: |
-          count=$(grep -c "TODO" src/data/site.yaml || true)
+          count=$(grep -v "^\s*#" src/data/site.yaml | grep -c "TODO" || true)
           if [ "$count" -gt 0 ]; then
             echo "::warning file=src/data/site.yaml::$count lines in site.yaml still contain TODO placeholders"
           fi

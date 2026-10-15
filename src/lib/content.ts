@@ -48,9 +48,16 @@ export interface Site {
   experience: {
     role: string;
     organization: string;
+    location?: string;
     start: string;
     end: string;
     points: string[];
+  }[];
+  education: {
+    school: string;
+    location?: string;
+    degree: string;
+    date?: string;
   }[];
 }
 

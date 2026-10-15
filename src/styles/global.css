@@ -491,6 +491,7 @@ li.todo {
 .bio {
   display: grid;
   gap: 1rem;
+  align-content: start;
 }
 
 .skills {
@@ -550,6 +551,28 @@ li.todo {
 .timeline ul {
   margin: 0.6rem 0 0;
   padding-left: 1.2rem;
+}
+
+.subheading {
+  font-size: 1.25rem;
+  margin: 2.5rem 0 1rem;
+}
+
+.education {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.edu-school {
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--muted);
+  font-weight: 400;
 }
 
 /* ---------- Contact ---------- */

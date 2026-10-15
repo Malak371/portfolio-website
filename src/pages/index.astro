@@ -6,7 +6,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import T from '../components/T.astro';
 import { site, isTodo } from '../lib/content';
 
-const { profile, projects, about, experience } = site;
+const { profile, projects, about, experience, education } = site;
 const year = new Date().getFullYear();
 ---
 <Base>
@@ -48,13 +48,23 @@ const year = new Date().getFullYear();
         {experience.map((job) => (
           <li>
             <h3><T v={job.role} /> · <span class="org"><T v={job.organization} /></span></h3>
-            <p class="dates"><T v={job.start} /> – <T v={job.end} /></p>
+            <p class="dates"><T v={job.start} /> – <T v={job.end} />{job.location && ` · ${job.location}`}</p>
             <ul>
               {job.points.map((pt) => <li><T v={pt} /></li>)}
             </ul>
           </li>
         ))}
       </ol>
+
+      <h3 class="subheading">Education</h3>
+      <ul class="education">
+        {education.map((ed) => (
+          <li>
+            <p class="edu-school">{ed.school}{ed.location && <span class="muted"> · {ed.location}</span>}</p>
+            <p>{ed.degree}{ed.date && <span class="muted"> · {ed.date}</span>}</p>
+          </li>
+        ))}
+      </ul>
     </section>
 
     <section id="contact" class="section container" aria-labelledby="contact-title">
