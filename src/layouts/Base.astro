@@ -1,0 +1,51 @@
+---
+import '../styles/global.css';
+import { site, isTodo, publicUrl } from '../lib/content';
+
+const { profile } = site;
+const title = `${profile.name} | Software Engineer`;
+const description = isTodo(profile.summary)
+  ? `Portfolio of ${profile.name}, software engineer: featured projects, experience and contact details.`
+  : profile.summary;
+const canonical = new URL(`${import.meta.env.BASE_URL.replace(/\/$/, '')}/`, Astro.site).href;
+const ogImage = new URL(publicUrl('og.png'), Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href={publicUrl('favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={publicUrl('favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={publicUrl('apple-touch-icon.png')} />
+    <link rel="sitemap" href={publicUrl('sitemap-index.xml')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profile.name}, software engineer portfolio`} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Apply the saved theme before first paint to avoid a flash. -->
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

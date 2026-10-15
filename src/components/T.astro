@@ -1,0 +1,11 @@
+---
+// Renders a piece of content text. Placeholders ("TODO: ...") are highlighted
+// so they stand out on the page until real content replaces them.
+import { isTodo } from '../lib/content';
+
+interface Props {
+  v: string;
+}
+const { v } = Astro.props;
+---
+{isTodo(v) ? <mark class="todo">{v}</mark> : v}

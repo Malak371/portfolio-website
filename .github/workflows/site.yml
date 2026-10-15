@@ -1,0 +1,49 @@
+name: CI
+
+# Deployment is handled by Netlify (production from main, previews for PRs).
+# This workflow checks that the site builds and that its HTML and links are valid.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Validate HTML
+        run: npm run check:html
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # LinkedIn and some sites block automated requests (999/403), so they
+          # are excluded in lychee.toml; everything else must resolve.
+          args: --config lychee.toml --root-dir "${{ github.workspace }}/dist" "dist/**/*.html"
+          fail: true
+
+      - name: Report remaining placeholders
+        run: |
+          count=$(grep -v "^\s*#" src/data/site.yaml | grep -c "TODO" || true)
+          if [ "$count" -gt 0 ]; then
+            echo "::warning file=src/data/site.yaml::$count lines in site.yaml still contain TODO placeholders"
+          fi

@@ -1,0 +1,165 @@
+# All site content lives here. Edit this file to change text, add projects,
+# skills or experience; no layout code needs to change.
+#
+# Anything starting with "TODO" is a placeholder and is highlighted on the page
+# so it can't be missed. Search for TODO before publishing.
+
+profile:
+  name: Malak Abdelhakim
+  headline: Software engineer building production web apps with Python, TypeScript and LLMs
+  location: New York City, NY
+  # Short intro shown under the headline in the hero.
+  summary: >-
+    I design, build and deploy production web platforms for A Chance In Life, a New York
+    nonprofit, from the database to the deployment. B.S. in Computer Science from Stevens
+    Institute of Technology, and a former Machine Learning Engineer Intern at ASAPP.
+  photo: profile.jpg           # file in src/assets/; set to "" to hide the photo
+  photoAlt: Portrait of Malak Abdelhakim
+  email: malakua489@gmail.com
+  github: https://github.com/Malak371
+  linkedin: https://www.linkedin.com/in/malak-abdelhakim-906854201/
+  resume: resume.pdf           # file in public/; set to "" to hide the Resume button
+
+# Featured projects, best first. Fields:
+#   problem / solution / impact  short sentences for the card
+#   stack                        list of technologies
+#   image                        file in src/assets/projects/
+#   links                        live / code / video (omit any that don't exist)
+#   note                         optional small note under the links
+#   private                      set for projects whose code can't be shared;
+#                                shows the "code is private" label and a case study
+projects:
+  - title: Health & Performance Aggregator
+    tagline: Sleep, activity, mood, training and study load in one dashboard, with explainable recovery and burnout-risk insights.
+    problem: Health and performance data is spread across apps (Apple Health, Fitbit, training logs), so it's hard to see how sleep, training and study load affect each other.
+    solution: A FastAPI service ingests CSV, Apple Health and Fitbit exports, computes rolling training load (ACWR), a recovery score, a transparent burnout-risk score, anomalies and a next-day readiness prediction that shows which signals drive it. A Streamlit dashboard draws the results.
+    impact: Live demo with no sign-up, on synthetic data or your own export. 120+ pytest tests run in CI against SQLite and PostgreSQL. The model is evaluated honestly against a "tomorrow is like today" baseline and validated on a public dataset of 16 people.
+    stack: [Python, FastAPI, PostgreSQL, SQLAlchemy, scikit-learn, pandas, Streamlit, Docker, GitHub Actions]
+    image: health-aggregator.png
+    imageAlt: Health & Performance Aggregator dashboard showing readiness, burnout risk, load ratio and a week-over-week summary
+    links:
+      live: https://health-performance-aggregator.streamlit.app/
+      code: https://github.com/Malak371/health-aggregator
+    note: Free hosting sleeps when idle, so the first load can take about a minute.
+
+  - title: Finance Tracker
+    tagline: Import a bank statement and see where your money goes, with categorisation that learns from your corrections.
+    problem: Bank statements come in inconsistent CSV formats, and categorising and budgeting transactions by hand is tedious.
+    solution: A React app and FastAPI backend that import any bank CSV (delimiters, encodings, date and amount formats), skip duplicates, categorise transactions with your rules plus a per-user Naive Bayes model, detect recurring charges and warn before a budget runs out.
+    impact: Live demo where each visitor gets a private account with a year of realistic data. 149 backend, 25 frontend and 5 end-to-end tests run in CI, including one that checks every endpoint requires sign-in, so no user can see another's data.
+    stack: [React, Vite, Tailwind CSS, FastAPI, PostgreSQL, SQLAlchemy, Playwright, Docker, GitHub Actions]
+    image: finance-tracker.png
+    imageAlt: Finance Tracker dashboard with a budget alert, monthly spending totals and spending insights
+    links:
+      live: https://finance-tracker-and-manager.vercel.app
+      code: https://github.com/Malak371/finance-tracker
+    note: The demo needs no sign-up. Its API can take up to a minute to wake up.
+
+  - title: NPA Studio
+    tagline: A production platform that turns a nonprofit's uploaded documents into a structured fundability assessment.
+    private: true
+    organization: A Chance In Life
+    problem: Nonprofits seeking evaluations, advisors offering reports to their clients, and funders vetting grantees all need a structured read on how fundable an organization is.
+    role: Special Projects Assistant at A Chance In Life. I designed, built and deployed the platform, owning the backend, data model and deployment end to end, and worked with non-technical program and leadership staff to turn their needs into features.
+    solution: User accounts, tiered pricing, sample reports, a Fundraising Hub resource center and an interactive needs-assessment guide. Uploaded documents are processed in the background and turned into reports with the Claude API.
+    architecture: A Flask 3 app on Gunicorn with PostgreSQL (SQLAlchemy 2, Alembic migrations). Uploads are stored in Cloudflare R2. Redis/RQ background workers extract text from PDFs with pypdf, fall back to OCR (pdf2image, Tesseract) for scanned files, and call the Claude API to generate the report. Stripe handles tiered payments and Resend sends transactional email.
+    impact: Live at npastudio.com, handling paid accounts and sensitive documents. Secured with TOTP two-factor authentication, bcrypt password hashing, CSRF protection, rate limiting on sign-in routes and MIME-based upload validation.
+    stack: [Python, Flask, PostgreSQL, SQLAlchemy, Alembic, Redis, RQ, Claude API, Stripe, Cloudflare R2, Tesseract OCR]
+    image: npa-studio.jpg
+    imageAlt: NPA Studio home page with a guide asking what problem the visitor needs solved
+    links:
+      live: https://www.npastudio.com
+
+  - title: Health & Wellness Lab
+    tagline: A mobile-first web app that helps people track what they eat, with barcode scanning, nutrition scores and rewards.
+    private: true
+    organization: A Chance In Life
+    problem: People in A Chance In Life's wellness program needed a free, simple way to see what's in their food and track what they eat, on whatever phone or computer they have.
+    role: Special Projects Assistant at A Chance In Life. I built and deployed the app, owning the backend, data model and deployment end to end.
+    solution: A progressive web app with in-browser barcode scanning, a food diary, A–E nutrition scores, recipe ideas, a health coach and a rewards system for healthy habits.
+    architecture: A Next.js 15 (App Router) and React 19 frontend in TypeScript and Tailwind CSS, exported as a static PWA on Cloudflare Pages, with two Pages Functions for sign-up and admin password resets. Supabase provides PostgreSQL and Auth, with row-level security on user data. Barcodes are read in the browser with ZXing, nutrition data comes from the Open Food Facts API, Nutri-Scores are computed locally, and the Anthropic Claude SDK powers the AI features.
+    impact: Live at wellnesslab.achanceinlife.org as a free program for the public; installable on phones from the browser.
+    stack: [TypeScript, Next.js, React, Tailwind CSS, Supabase, PostgreSQL, Cloudflare Pages, ZXing, Claude SDK]
+    image: wellness-lab.jpg
+    imageAlt: Health & Wellness Lab home page reading "Eat better, one scan at a time" with sign-in and create-account buttons
+    links:
+      live: https://wellnesslab.achanceinlife.org/
+
+about:
+  bio:
+    - >-
+      I'm a software engineer in New York City. As Special Projects Assistant at A Chance In
+      Life, I design, build and deploy the organization's two production web platforms: NPA
+      Studio, an LLM-powered assessment product, and the Health & Wellness Lab app. I work
+      directly with non-technical program and leadership staff to turn operational needs into
+      requirements, prototypes and shipped features.
+    - >-
+      I graduated from Stevens Institute of Technology in December 2025 with a B.S. in Computer
+      Science (GPA 3.6, Pinnacle Scholar). Through the Break Through Tech AI Fellowship I earned
+      a Machine Learning Foundations certificate from Cornell Tech, and as a Machine Learning
+      Engineer Intern at ASAPP I built NLP models for customer service conversations.
+  skills:
+    - group: Languages
+      items: [Python, TypeScript, JavaScript, Java, SQL, PL/pgSQL, C, HTML/CSS]
+    - group: Frameworks
+      items: [React, Next.js, Vite, Tailwind CSS, FastAPI, Flask, Node.js, Express, Streamlit, SQLAlchemy, Pydantic]
+    - group: Data / ML / AI
+      items: [PostgreSQL, Supabase, SQLite, MongoDB, Redis, pandas, NumPy, scikit-learn, NLP, Claude API, Tesseract OCR]
+    - group: Tools & cloud
+      items: [Git, Docker, GitHub Actions, Vercel, Render, Cloudflare Pages & R2, Stripe, pytest, Playwright, Vitest]
+
+# Most recent first. Should match the resume.
+experience:
+  - role: Special Projects Assistant
+    organization: A Chance In Life
+    location: New York, NY
+    start: Apr 2026
+    end: Present
+    points:
+      - Built and deployed two production web platforms for the organization, npastudio.com and wellnesslab.achanceinlife.org, owning each from requirements gathering through design, development and launch.
+      - Collaborate with organizational stakeholders to translate operational and business needs into technical requirements and user-friendly, scalable solutions.
+      - Build and maintain structured data workflows for collecting, processing and analyzing program data across multiple stakeholders supporting international program operations.
+      - Make system design decisions balancing speed, reliability, security and maintainability, and coordinate across teams to deliver key initiatives on time.
+  - role: AI Fellow
+    organization: Break Through Tech
+    location: New York, NY
+    start: May 2023
+    end: Apr 2024
+    points:
+      - Selected from 1,500+ applicants for a 12-month program including machine learning coursework with Cornell faculty, experiential learning and mentorship from industry professionals.
+      - Collaborated with a team on an industry project identifying salient parts of customer service conversations, experimenting with combinations of vectorization techniques and models.
+      - Achieved 92% accuracy in a Kaggle image classification competition hosted for the New York Botanical Garden.
+  - role: Machine Learning Engineer Intern
+    organization: ASAPP
+    location: Remote
+    start: Aug 2023
+    end: Dec 2023
+    points:
+      - Built supervised learning models to predict salient sentences in customer service conversations using feature engineering and vectorization techniques on large-scale customer interaction data.
+      - Systematically tested model and vectorization combinations (TF-IDF and Bag of Words with Logistic Regression and KNN) to identify the best performing approach.
+      - Evaluated models with accuracy, precision, recall, F1-score and ROC AUC to drive iterative improvement.
+      - Built backend data processing workflows with structured datasets and APIs to support end-to-end model development.
+  - role: Research Assistant
+    organization: Stevens Institute of Technology
+    location: Hoboken, NJ
+    start: May 2023
+    end: Aug 2023
+    points:
+      - Collaborated with faculty to evaluate AI tools (ChatGPT) in educational settings, analyzing their effectiveness for assignment creation and instructional support.
+      - Designed and assessed AI-generated assignments on Java design patterns, implementing and testing Java solutions to evaluate correctness and usability.
+      - Documented and presented findings on the feasibility and limitations of AI-assisted teaching tools.
+  - role: Marketing Intern
+    organization: A Chance In Life
+    location: New York, NY
+    start: Dec 2020
+    end: Mar 2021
+    points:
+      - Helped raise $2,880 in sponsorships for children through a team-led social media marketing campaign.
+
+education:
+  - school: Stevens Institute of Technology
+    location: Hoboken, NJ
+    degree: B.S. in Computer Science · GPA 3.6 · Pinnacle Scholar
+    date: Dec 2025
+  - school: Cornell Tech
+    degree: Online Certificate in Machine Learning Foundations (through Break Through Tech)
