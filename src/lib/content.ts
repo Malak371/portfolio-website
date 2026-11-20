@@ -59,6 +59,12 @@ export interface Site {
     degree: string;
     date?: string;
   }[];
+  certifications: {
+    name: string;
+    issuer: string;
+    detail?: string;
+    date?: string;
+  }[];
 }
 
 export const site = parse(raw) as Site;
