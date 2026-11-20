@@ -60,10 +60,10 @@ projects:
     private: true
     organization: A Chance In Life
     problem: Nonprofits seeking evaluations, advisors offering reports to their clients, and funders vetting grantees all need a structured read on how fundable an organization is.
-    role: Special Projects Assistant at A Chance In Life. I designed, built and deployed the platform, owning the backend, data model and deployment end to end, and worked with non-technical program and leadership staff to turn their needs into features.
+    role: Built as Special Projects Assistant at A Chance In Life (now Development Coordinator). I was both product manager and engineer, iterating on and testing features with the founder to shape the product from idea to launch, and I owned the backend, data model and deployment end to end.
     solution: User accounts, tiered pricing, sample reports, a Fundraising Hub resource center and an interactive needs-assessment guide. Uploaded documents are processed in the background and turned into reports with the Claude API.
     architecture: A Flask 3 app on Gunicorn with PostgreSQL (SQLAlchemy 2, Alembic migrations). Uploads are stored in Cloudflare R2. Redis/RQ background workers extract text from PDFs with pypdf, fall back to OCR (pdf2image, Tesseract) for scanned files, and call the Claude API to generate the report. Stripe handles tiered payments and Resend sends transactional email.
-    impact: Live at npastudio.com, handling paid accounts and sensitive documents. Secured with TOTP two-factor authentication, bcrypt password hashing, CSRF protection, rate limiting on sign-in routes and MIME-based upload validation.
+    impact: Live at npastudio.com, handling paid accounts and sensitive documents. I track traffic, sources and user behavior with Google Analytics and use it to guide content and product updates. Secured with TOTP two-factor authentication, bcrypt password hashing, CSRF protection, rate limiting on sign-in routes and MIME-based upload validation.
     stack: [Python, Flask, PostgreSQL, SQLAlchemy, Alembic, Redis, RQ, Claude API, Stripe, Cloudflare R2, Tesseract OCR]
     image: npa-studio.jpg
     imageAlt: NPA Studio home page with a guide asking what problem the visitor needs solved
@@ -75,7 +75,7 @@ projects:
     private: true
     organization: A Chance In Life
     problem: People in A Chance In Life's wellness program needed a free, simple way to see what's in their food and track what they eat, on whatever phone or computer they have.
-    role: Special Projects Assistant at A Chance In Life. I built and deployed the app, owning the backend, data model and deployment end to end.
+    role: Built as Special Projects Assistant at A Chance In Life (now Development Coordinator), working directly with the CEO to turn his needs into a working app. I owned the backend, data model and deployment end to end.
     solution: A progressive web app with in-browser barcode scanning, a food diary, A–E nutrition scores, recipe ideas, a health coach and a rewards system for healthy habits.
     architecture: A Next.js 15 (App Router) and React 19 frontend in TypeScript and Tailwind CSS, exported as a static PWA on Cloudflare Pages, with two Pages Functions for sign-up and admin password resets. Supabase provides PostgreSQL and Auth, with row-level security on user data. Barcodes are read in the browser with ZXing, nutrition data comes from the Open Food Facts API, Nutri-Scores are computed locally, and the Anthropic Claude SDK powers the AI features.
     impact: Live at wellnesslab.achanceinlife.org as a free program for the public; installable on phones from the browser.
@@ -88,38 +88,45 @@ projects:
 about:
   bio:
     - >-
-      I'm a software engineer in New York City. As Special Projects Assistant at A Chance In
-      Life, I design, build and deploy the organization's two production web platforms: NPA
+      I'm a software engineer in New York City. At A Chance In Life, where I'm now Development
+      Coordinator, I built and deployed the organization's two production web platforms: NPA
       Studio, an LLM-powered assessment product, and the Health & Wellness Lab app. I work
-      directly with non-technical program and leadership staff to turn operational needs into
-      requirements, prototypes and shipped features.
+      directly with the CEO to turn his needs into working applications, and I was both product
+      manager and engineer for NPA Studio, from idea to launch.
     - >-
       I graduated from Stevens Institute of Technology in December 2025 with a B.S. in Computer
       Science (GPA 3.6, Pinnacle Scholar). Through the Break Through Tech AI Fellowship I earned
       a Machine Learning Foundations certificate from Cornell Tech, and as a Machine Learning
-      Engineer Intern at ASAPP I built NLP models for customer service conversations.
+      Engineer Intern at ASAPP I built NLP models for customer service conversations. In 2026 I
+      also earned Google's Advanced Data Analytics and Cybersecurity professional certificates.
   skills:
     - group: Languages
       items: [Python, TypeScript, JavaScript, Java, SQL, PL/pgSQL, C, HTML/CSS]
     - group: Frameworks
       items: [React, Next.js, Vite, Tailwind CSS, FastAPI, Flask, Node.js, Express, Streamlit, SQLAlchemy, Pydantic]
     - group: Data / ML / AI
-      items: [PostgreSQL, Supabase, SQLite, MongoDB, Redis, pandas, NumPy, scikit-learn, NLP, Claude API, Tesseract OCR]
+      items: [PostgreSQL, Supabase, SQLite, MongoDB, Redis, pandas, NumPy, SciPy, scikit-learn, statistics, regression, NLP, Claude API, Tesseract OCR]
     - group: Tools & cloud
-      items: [Git, Docker, GitHub Actions, Vercel, Render, Cloudflare Pages & R2, Stripe, pytest, Playwright, Vitest]
+      items: [Git, Docker, GitHub Actions, Linux, Vercel, Render, Cloudflare Pages & R2, Stripe, Google Analytics, pytest, Playwright, Vitest]
 
 # Most recent first. Should match the resume.
 experience:
+  - role: Development Coordinator
+    organization: A Chance In Life
+    location: New York, NY
+    start: Nov 2026
+    end: Present
+    points:
+      - Coordinate digital systems and data workflows that support international program operations across multiple stakeholders.
   - role: Special Projects Assistant
     organization: A Chance In Life
     location: New York, NY
     start: Apr 2026
-    end: Present
+    end: Nov 2026
     points:
-      - Built and deployed two production web platforms for the organization, npastudio.com and wellnesslab.achanceinlife.org, owning each from requirements gathering through design, development and launch.
-      - Collaborate with organizational stakeholders to translate operational and business needs into technical requirements and user-friendly, scalable solutions.
-      - Build and maintain structured data workflows for collecting, processing and analyzing program data across multiple stakeholders supporting international program operations.
-      - Make system design decisions balancing speed, reliability, security and maintainability, and coordinate across teams to deliver key initiatives on time.
+      - Built and deployed two live public web platforms for the organization, npastudio.com and wellnesslab.achanceinlife.org, working directly with the CEO to turn his needs into working applications.
+      - Served as both product manager and engineer for NPA Studio, iterating on and testing features with its founder to shape the product from idea to launch.
+      - Used Google Analytics to track site traffic, sources and user behavior on NPA Studio, using the data to guide content and product updates.
   - role: AI Fellow
     organization: Break Through Tech
     location: New York, NY
@@ -161,5 +168,17 @@ education:
     location: Hoboken, NJ
     degree: B.S. in Computer Science · GPA 3.6 · Pinnacle Scholar
     date: Dec 2025
-  - school: Cornell Tech
-    degree: Online Certificate in Machine Learning Foundations (through Break Through Tech)
+
+# Most recent first.
+certifications:
+  - name: Google Advanced Data Analytics Professional Certificate
+    issuer: Coursera
+    detail: Statistics, regression, machine learning, predictive modeling
+    date: Nov 2026
+  - name: Google Cybersecurity Professional Certificate
+    issuer: Coursera
+    detail: Linux, SQL, SIEM tools, IDS, Python automation
+    date: Nov 2026
+  - name: Machine Learning Foundations
+    issuer: Cornell Tech (Break Through Tech AI Program)
+    date: "2024"
